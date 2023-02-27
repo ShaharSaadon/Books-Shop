@@ -1,10 +1,10 @@
 import { bookService } from '../services/book.service.js'
 
-import BookFilter from './BookFilter.js'
-import BookList from './BookList.js'
+import BookFilter from '../cmps/BookFilter.js'
+import BookList from '../cmps/BookList.js'
 
-import BookDetails from './BookDetails.js'
-import BookEdit from './BookEdit.js'
+import BookDetails from '../cmps/BookDetails.js'
+import BookEdit from '../cmps/BookEdit.js'
 
 export default {
     template: `
@@ -17,20 +17,20 @@ export default {
             <BookEdit @book-saved="onSaveBook"/>
             <BookDetails 
             v-if="selectedBook"
-            @hide-details="selectedBook = null"
-                :book="selectedBook"/>
+            :book="selectedBook"
+            @hide-details="selectedBook = null"/>
+
         </section>
     `,
     data() {
         return {
-            books: null,
+            books: [],
             selectedBook: null,
             filterBy: {maxPrice:250},
         }
     },
     methods: {
         removeBook(bookId) {
-            console.log('remove', bookId)
             bookService.remove(bookId)
                 .then(() => {
                     const idx = this.books.findIndex(book => book.id === bookId)
@@ -53,7 +53,8 @@ export default {
     computed: {
         filteredBooks() {
             const regex = new RegExp(this.filterBy.title, 'i')
-            return (this.books.filter(book => regex.test(book.title)).filter(book => book.listPrice.amount<this.filterBy.maxPrice))
+            return (this.books.filter(book => regex.test(book.title))
+                .filter(book => book.listPrice.amount<this.filterBy.maxPrice))
         }
     },
     created() {

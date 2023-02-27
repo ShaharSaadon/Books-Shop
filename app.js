@@ -3,8 +3,8 @@ const { createApp } = Vue
 import AppHeader from './cmps/AppHeader.js'
 import AppFooter from './cmps/AppFooter.js'
 
-import MissBook from './cmps/MissBook.js'
 
+import MissBook from './pages/MissBook.js'
 import AboutPage from './pages/AboutPage.js'
 import HomePage from './pages/HomePage.js'
 
@@ -17,8 +17,8 @@ const options = {
             <AppHeader @setRoute="route = $event"/>
             <main class="router-view">
                 <HomePage v-if="route === 'HomePage'"/>
-                <MissBook v-if="route === 'MissBook'"/>
-                <AboutPage v-if="route === 'AboutPage'"/>
+                <MissBook v-else-if="route === 'MissBook'"/>
+                <AboutPage v-else-if="route === 'AboutPage'"/>
             </main>
             <AppFooter />
         </section>
