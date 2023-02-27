@@ -5,7 +5,7 @@ export default {
         <p v-if="book.listPrice.isOnSale"> On Sale!</p>
             <h2>{{ book.title }}</h2>
             <h4>{{readingVibe}}</h4>
-            <h4>{{fashion}}</h4>
+            <h4>.{{fashion}}</h4>
             <p>{{ book.subtitle }}</p>
             <p>authors: {{ book.authors.join(' ') }}</p>
             <p>Published Date: {{ book.publishedDate}}</p>
