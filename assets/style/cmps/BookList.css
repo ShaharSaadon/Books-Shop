@@ -1,0 +1,22 @@
+.book-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+
+    padding: 10px;
+    /* background-color: pink; */
+    list-style-type: none;
+}
+
+.book-list ul li{
+    padding: 10px;
+    background-color: whitesmoke;
+    min-height: 160px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.book-list ul li img{
+    width:65%;
+    margin: 1rem;
+}
