@@ -7,8 +7,11 @@ export default {
             <ul class="clean-list">
                 <li v-for="book in books" :key="book.id">
                     <BookPreview :book="book"/>
-                    <button @click="showDetails(book.id)">Details</button>
+                    <RouterLink :to="'/books/edit/' + book.id">Edit</RouterLink> |
+                    <RouterLink :to="'/books/' + book.id">Details</RouterLink> 
                     <button @click="remove(book.id)">x</button>
+        
+
                 </li>
             </ul>
         </section>

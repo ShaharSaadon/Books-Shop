@@ -2,6 +2,7 @@
 
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
+import booksDb from "../assets/books.json" assert {type:"json"}
 
 const BOOK_KEY = 'bookDB'
 
@@ -13,6 +14,7 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
+    addReview,
 }
 
 function query(filterBy = {}) {
@@ -60,64 +62,21 @@ function getEmptyBook(title = '', description = '', thumbnail = '') {
     }
 }
 
+function addReview(bookId,review){
+    
+    get(bookId)
+        .then(book => {
+            if(!book.reviews) book.reviews = []
+            book.reviews.push(review)
+            save(book)
+        })
+            
+}
+
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
-        books = [
-            {
-                "id": "OXeMG8wNskc",
-                "title": "The Power Of now",
-                "subtitle": "mi est eros dapibus himenaeos",
-                "authors": ["Barbara Cartland"],
-                "publishedDate": 2021,
-                "description": "placerat nisi sodales suscipit tellus",
-                "pageCount": 420,
-                "categories": ["Computers", "Hack"],
-                "thumbnail": "https://www.coding-academy.org/books-photos/20.jpg",
-                "language": "en",
-                "listPrice": {
-                    "amount": 168,
-                    "currencyCode": "EUR",
-                    "isOnSale": true
-                }
-            },
-            {
-                "id": "OXeMG8jNskc",
-                "title": "Harry poter",
-                "subtitle": "skflgdskf;gm l;dgk l;dkg;ldsfgkdsfgl",
-                "authors": ["Barbara Cartland"],
-                "publishedDate": 1999,
-                "description": "placerat nisi sodales suscipit tellus",
-                "pageCount": 713,
-                "categories": ["Computers", "Hack"],
-                "thumbnail": "https://www.coding-academy.org/books-photos/19.jpg",
-                "language": "en",
-                "listPrice": {
-                    "amount": 109,
-                    "currencyCode": "EUR",
-                    "isOnSale": false
-                }
-            },
-            {
-                "id": "OXeMG8ANskc",
-                "title": "metaus hendrerit",
-                "subtitle": "mi est eros dapibus himenaeos",
-                "authors": ["Barbara Cartland"],
-                "publishedDate": 1999,
-                "description": "placerat nisi sodales suscipit tellus",
-                "pageCount": 713,
-                "categories": ["Computers", "Hack"],
-                "thumbnail": "https://www.coding-academy.org/books-photos/17.jpg",
-                "language": "en",
-                "listPrice": {
-                    "amount": 109,
-                    "currencyCode": "EUR",
-                    "isOnSale": false
-                }
-            },
-        ]
-
-
+        books = booksDb
         utilService.saveToStorage(BOOK_KEY, books)
     }
 }

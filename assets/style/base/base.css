@@ -32,3 +32,9 @@ video,
 object {
     max-width: 100%;
 }
+
+.router-link-active{
+text-decoration: overline;
+font-weight: 600;
+color:rgb(103, 103, 176);
+}

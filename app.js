@@ -1,12 +1,10 @@
 const { createApp } = Vue
+import {router} from './routes.js'
+
 
 import AppHeader from './cmps/AppHeader.js'
 import AppFooter from './cmps/AppFooter.js'
-
-import MissBook from './cmps/MissBook.js'
-
-import AboutPage from './pages/AboutPage.js'
-import HomePage from './pages/HomePage.js'
+import UserMsg from './cmps/UserMsg.js'
 
 
 
@@ -14,13 +12,12 @@ const options = {
     template: `
     
         <section class="main-container main-layout">
-            <AppHeader @setRoute="route = $event"/>
+            <AppHeader/>
             <main class="router-view">
-                <HomePage v-if="route === 'HomePage'"/>
-                <MissBook v-if="route === 'MissBook'"/>
-                <AboutPage v-if="route === 'AboutPage'"/>
+            <RouterView />
             </main>
             <AppFooter />
+            <UserMsg />
         </section>
     `,
     data() {
@@ -29,13 +26,13 @@ const options = {
         }
     },
     components: {
-        MissBook,
         AppHeader,
         AppFooter,
-        AboutPage,
-        HomePage,
+        UserMsg,
+      
         
     }
 }
 const app = createApp(options)
+app.use(router)
 app.mount('#app')
